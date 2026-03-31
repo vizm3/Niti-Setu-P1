@@ -15,20 +15,20 @@ Eligibility decisions are made by retrieving relevant chunks from real official 
                         │  POST /api/eligibility { profile }
                         ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                    BACKEND (Node.js / Express)                   │
-│                                                                  │
-│  1. profileToQuery()   → natural language query from profile     │
-│  2. embedQuery()       → Xenova/all-MiniLM-L6-v2 (local, 384d) │
-│  3. $vectorSearch      → MongoDB Atlas finds top-6 chunks        │
+│                    BACKEND (Node.js / Express)                  │
+│                                                                 │
+│  1. profileToQuery()   → natural language query from profile    │
+│  2. embedQuery()       → Xenova/all-MiniLM-L6-v2 (local, 384d)  │
+│  3. $vectorSearch      → MongoDB Atlas finds top-6 chunks       │
 │  4. runRAGChain()      → Gemini 2.5 Flash reasons & decides     │
-│  5. Returns JSON       → { eligible, proof, reasons, citation }  │
+│  5. Returns JSON       → { eligible, proof, reasons, citation } │
 └───────────────────────┬─────────────────────────────────────────┘
                         │
                         ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                   MONGODB ATLAS                                  │
+│                   MONGODB ATLAS                                 │
 │   Collection: chunks   (text + 384-dim embedding vectors)       │
-│   Collection: schemes  (display metadata)                        │
+│   Collection: schemes  (display metadata)                       │
 │   Index: vector_index  (cosine similarity search)               │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -37,14 +37,14 @@ Eligibility decisions are made by retrieving relevant chunks from real official 
 
 ## Supported Schemes
 
-| Emoji | ID           | Scheme Name                                     | Benefit                          |
-|-------|--------------|-------------------------------------------------|----------------------------------|
-| 🌾    | `pmkisan`    | Pradhan Mantri Kisan Samman Nidhi               | ₹6,000 / year                   |
-| 🛡️    | `pmfby`      | Pradhan Mantri Fasal Bima Yojana                | Full crop insurance              |
-| 💳    | `kcc`        | Kisan Credit Card Scheme                        | Credit up to ₹3 lakh @ 4% p.a. |
-| 💧    | `pmksy`      | Pradhan Mantri Krishi Sinchayee Yojana          | Irrigation & water efficiency    |
+| Emoji | ID           | Scheme Name                                     | Benefit                            |
+|-------|--------------|-------------------------------------------------|------------------------------------|
+| 🌾    | `pmkisan`    | Pradhan Mantri Kisan Samman Nidhi               | ₹6,000 / year                      |
+| 🛡️    | `pmfby`      | Pradhan Mantri Fasal Bima Yojana                | Full crop insurance                |
+| 💳    | `kcc`        | Kisan Credit Card Scheme                        | Credit up to ₹3 lakh @ 4% p.a.     |
+| 💧    | `pmksy`      | Pradhan Mantri Krishi Sinchayee Yojana          | Irrigation & water efficiency      |
 | 🍀    | `pkvy`       | Paramparagat Krishi Vikas Yojana                | ₹50,000 / ha for 3 years (organic) |
-| 📊    | `agribudget` | Demand for Grants Analysis 2026-27: Agriculture | Policy & funding insights        |
+| 📊    | `agribudget` | Demand for Grants Analysis 2026-27: Agriculture | Policy & funding insights          |
 
 ---
 
@@ -343,7 +343,7 @@ curl -X POST http://localhost:5000/api/schemes/upload \
 | Frontend     | React 18, CSS Custom Properties               |
 | Voice        | Web Speech API                                |
 | Backend      | Node.js 24, Express 4                         |
-| Embeddings   | Xenova/all-MiniLM-L6-v2 (local, 384-dim)     |
+| Embeddings   | Xenova/all-MiniLM-L6-v2 (local, 384-dim)      |
 | LLM          | Google Gemini 2.5 Flash                       |
 | Vector DB    | MongoDB Atlas Vector Search                   |
 | PDF Parsing  | pdf-parse                                     |
